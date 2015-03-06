@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<meta content="text/html; charset=gb2312" http-equiv="Content-Type">
+<TITLE>Qfx-一个微型的js动画框架</TITLE>
+<META NAME="Generator" CONTENT="EditPlus">
+<META NAME="Author" CONTENT="">
+<META NAME="Keywords" CONTENT="">
+<META NAME="Description" CONTENT="">
+<style>
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td { margin:0; padding:0; }
+table { border-collapse:collapse; border-spacing:0; }
+fieldset, img { border:0; }
+address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal; }
+ol, ul { list-style:none; }
+caption, th { text-align:left; }
+h1, h2, h3, h4, h5, h6 { font-size:100%; font-weight:normal; }
+q:before, q:after { content:''; }
+abbr, acronym { border:0; }
+fieldset { display:inline; }
+button { line-height:1.2; vertical-align:middle; cursor:pointer; }
+strong { font-weight:800; }
+/*API*/
+body {background:url("AieI9.png") repeat;font-family:"微软雅黑"}
+.wrap {
+	width:960px;
+	height:100%;
+	margin:0 auto;
+}
+#title {
+	position:absolute;
+	font-size:98px;
+	font-weight:bold;
+	color:#009900;
+	font-family:'Lobster', Georgia, serif;
+	text-shadow:5px 5px 0 rgba(255, 255, 255, 0.9);
+	left:20;
+	top:-800px;
+}
+.des {
+	position:absolute;
+	font-size:12px;
+	color:#000;
+	top:230px;
+	left:-500px;
+}
+#doc {
+	position:absolute;
+	top:320px;
+}
+#doc li.p {width:920px;padding:20px;background:#fff;display:none;line-height:23px;margin-bottom:20px;font-size:12px;}
+#doc h2 {font-size:16px;font-weight:bold;color:#336600}
+#doc p {text-indent:2em;font-size:12px;}
+.test {
+	width:50px;
+	height:50px;
+	background:#663399;
+	color:#fff;
+	text-align:center;
+	font-size:12px;
+	line-height:50px;
+	cursor: pointer;
+}
+#Easy {width:600px;height:80px;border:1px solid #ccc;margin:10px auto;position:relative;}
+#Easy div {width:80px;height:80px;background:#9933FF;position:absolute;left:0;top:0;line-height:80px;font-size:12px;color:#fff;text-align:center;}
+#Easing ul{list-style:circle inside;}
+#Easing li {cursor:pointer;border-bottom:1px dashed #d0d0d0}
+#Easing li.hover {color:#f00}
+</style>
+</HEAD>
+
+<BODY>
+<div class="wrap">
+	<h1 id="title">Qfx.js</h1>
+	<p class="des">一个微型的动画框架</p>
+	<ul id="doc">
+		<li class="p"><h2>框架介绍</h2><p>Qfx是一个微型的动画框架，主要是用来简化js+css动画的开发，在日常工作中，很多时候我们需要用一大堆的脚本去书写js动画，且效果不是很好，Qfx支持以非常便捷的方式实现动画方式，内置十五种缓动方式，支持链式调用等特性，是你快速制作页面动画的有力帮手！</p></li>
+		<li class="p"><h2>基本使用方法</h2><p><pre>1.Qfx('id').show('slow');<br>2.Qfx('id').show(2000,'swingTo');<br>3.Qfx('id').show('slow','swingTo',function(){alert('Qfx is run!')});<br/>Qfx支持获取id元素，或者是简单的根据class选择,如Qfx('div.a(0)').show(),表示选择class名为a的第一个元素作为动画对象</pre></p></li>
+		<li class="p"><h2>自定义动画go</h2><pre>Qfx('id').go({marginLeft:'400px',fontSize:'16px',backgroundColor:'#f00'},'slow','bounce',function(){alert('done!')});<br><span style="color:green">/*<br>** 自定义动画<br>* @param { function/null } 函数或者空值，必选参数<br>* @param { String/Number } 动画持续时间<br>* @param { String & Function  } tween算法<br>* @param { Function } 动画完成的回调<br>*/</span><br>go(运动元素集合,持续时间,缓动方式,完成回调)</pre><div class="test">click</div></li>
+		
+		<li class="p"><h2>快速设置显示show</h2><pre>Qfx('id').show('defaults','linear',function(){alert('done!')});<br><span style="color:green">/*<br>** show obj.show(args) 快速设置显示<br>* @param {String/Number} 动画持续时间<br>* @param { String & Function  } tween算法<br>* @param { Function } 动画完成的回调<br>*/</span><br>show(持续时间,缓动方式,完成回调)</pre><div class="test">click</div></li>
+
+		<li class="p"><h2>快速设置隐藏hide</h2><pre>Qfx('id').hide(600,'easeOutExpo',function(){alert('done!')});<br><span style="color:green">/*<br>** hide obj.hide(args) 快速设置隐藏<br>* @param {String/Number} 动画持续时间<br>* @param { String & Function  } tween算法<br>* @param { Function } 动画完成的回调<br>*/</span><br>show(持续时间,缓动方式,完成回调)</pre><div class="test">click</div></li>
+
+		<li class="p"><h2>快速设置动画延迟delay</h2>Qfx('id').go({marginLeft:'400px',fontSize:'16px',backgroundColor:'#f00'},'slow','bounce',function(){alert('done!')}).delay(500).hide('slow');<br><span style="color:green">/*<br>** delay obj.delay(args) 快速设置动画延迟时间<br>* @param {Number} 延迟多少<br>*/</span><br>delay(延迟时间)<div class="test">click</div></li>
+
+		<li class="p"><h2>停止动画stop</h2><pre>Qfx('id').show().stop(true,false);<br><span style="color:green">/*<br>**停止动画<br>*@param { Boolean } 是否清除队列<br>*@param { Boolean } 是否执行当前队列的最后一帧动画<br>*@return { Object }<br>*/</span><br>stop(是否清除队列,是否执行当前队列的最后一帧动画)</pre><div class="test">click</div><div class="test">stop</div></li>
+
+		<li class="p"><h2>快速设置滑动显示slideDown</h2><pre>Qfx('id').slideDown('defaults','linear',function(){alert('done!')});<br><span style="color:green">/*<br>** show obj.slideDown(args) 快速设置滑动显示<br>* @param {String/Number} 动画持续时间<br>* @param { String & Function  } tween算法<br>* @param { Function } 动画完成的回调<br>*/</span><br>slideDown(持续时间,缓动方式,完成回调)</pre><div class="test">click</div></li>
+
+		<li class="p"><h2>快速设置滑动隐藏slideUp</h2><pre>Qfx('id').slideUp('defaults','linear',function(){alert('done!')});<br><span style="color:green">/*<br>** show obj.slideUp(args) 快速设置滑动隐藏<br>* @param {String/Number} 动画持续时间<br>* @param { String & Function  } tween算法<br>* @param { Function } 动画完成的回调<br>*/</span><br>slideUp(持续时间,缓动方式,完成回调)</pre><div class="test">click</div></li>
+
+		<li class="p"><h2>快速设置滑动隐藏/显示slideToggle</h2><pre>Qfx('id').slideToggle('defaults','linear',function(){
+			Qfx("div.test(8)").slideToggle('slow')
+		})<br><span style="color:green">/*<br>** show obj.slideToggle(args) 快速设置滑动隐藏或显示<br>* @param {String/Number} 动画持续时间<br>* @param { String & Function  } tween算法<br>* @param { Function } 动画完成的回调<br>*/</span><br>slideToggle(持续时间,缓动方式,完成回调)</pre><div class="test">click</div></li>
+
+		<li class="p"><h2>快速设置透明度显示fadeIn</h2><pre>Qfx('id').fadeIn('defaults','linear',function(){alert('done!')});<br><span style="color:green">/*<br>** show obj.fadeIn(args) 快速设置透明度显示<br>* @param {String/Number} 动画持续时间<br>* @param { String & Function  } tween算法<br>* @param { Function } 动画完成的回调<br>*/</span><br>fadeIn(持续时间,缓动方式,完成回调)</pre><div class="test">click</div></li>
+
+		<li class="p"><h2>快速设置透明度隐藏fadeOut</h2><pre>Qfx('id').fadeOut('defaults','linear',function(){alert('done!')});<br><span style="color:green">/*<br>** show obj.fadeOut(args) 快速设置透明度隐藏<br>* @param {String/Number} 动画持续时间<br>* @param { String & Function  } tween算法<br>* @param { Function } 动画完成的回调<br>*/</span><br>fadeOut(持续时间,缓动方式,完成回调)</pre><div class="test">click</div></li>
+
+		<li class="p"><h2>缓动方式</h2><p>Qfx内置了15种缓动方式，您可以根据需要选择自己的动画缓动方式，缓动运动图示如下:</p>
+		<div id="Easy"><div id="gogo">帅</div></div>
+		<div  id="Easing">
+		<ul>
+			<li id="linear">linear</li>
+			<li id="easeIn">easeIn</li>
+			<li id="easeOut">easeOut</li>
+			<li id="easeBoth">easeBoth</li>
+			<li id="easeInStrong">easeInStrong</li>
+			<li id="easeOutStrong">easeOutStrong</li>
+			<li id="easeBothStrong">easeBothStrong</li>
+			<li id="easeOutQuart">easeOutQuart</li>
+			<li id="easeInOutExpo">easeInOutExpo</li>
+			<li id="easeOutExpo">easeOutExpo</li>
+			<li id="swingFrom">swingFrom</li>
+			<li id="swingTo">swingTo</li>
+			<li id="backIn">backIn</li>
+			<li id="backOut">backOut</li>
+			<li id="bounce">bounce</li>
+		</ul>
+		</div>
+		</li>
+
+		<li class="p"><h2>下载使用</h2><p><a href="Qfx_min_1.0.0.js" target="_blank">Qfx.js</a></p></li>
+	</ul>
+</div>
+<script src="Qfx_min_1.0.0.js"></script>
+<script>
+	var l = parseInt(QfxTool.getStyle(document.body,'width'))/2-parseInt(QfxTool.getStyle(QfxTool.$("title"),'width'))/2;
+	Qfx("title").go({top:"100px"},'slow','bounce').delay(1000).go({left:l+"px"},'slow','bounce',function(){
+		Qfx("p.des(0)").go({left:l+20+"px",fontSize:"16px"},'fast');	Qfx("doc").go({left:parseInt(QfxTool.getStyle(document.body,'width'))/2-480+"px"},'slow','bounce',function(){
+			Qfx("li.p(0)").slideDown('slow','easeBoth',function(){
+				Qfx("li.p(1)").slideDown('slow','easeBoth',function(){
+					Qfx("li.p(2)").fadeIn('slow','easeBoth',function(){
+						Qfx("li.p(3)").slideDown('slow','easeBoth',function(){
+							Qfx("li.p(4)").show('fast','easeBoth',function(){
+								Qfx("li.p(5)").show();
+								Qfx("li.p(6)").show();
+								Qfx("li.p(7)").show();
+								Qfx("li.p(8)").show();
+								Qfx("li.p(9)").show();
+								Qfx("li.p(10)").show();
+								Qfx("li.p(11)").show();
+								Qfx("li.p(12)").show();
+								Qfx("li.p(13)").show();
+							})
+						});
+					})
+				});
+			});
+		});
+	});
+	QfxTool.$$$("div.test",0).onclick = function(){
+		Qfx("div.test(0)").go({marginLeft:'400px',fontSize:'16px',backgroundColor:'#f00'},'slow','bounce');
+	};
+	QfxTool.$$$("div.test",1).onclick = function(){
+		Qfx("div.test(1)").show('defaults','linear',function(){alert('done!')});
+	};
+	QfxTool.$$$("div.test",2).onclick = function(){
+		Qfx("div.test(2)").hide(600,'easeOutExpo',function(){alert('done!')});
+	};
+	QfxTool.$$$("div.test",3).onclick = function(){
+		Qfx("div.test(3)").go({marginLeft:'400px',fontSize:'16px',backgroundColor:'#f00'},'slow','bounce',function(){alert('done!')}).delay(500).hide('slow');
+	};
+	QfxTool.$$$("div.test",4).onclick = function(){
+		Qfx("div.test(4)").go({marginLeft:'400px',fontSize:'16px',backgroundColor:'#f00'},'slow').delay(500).go({marginLeft:'0px',fontSize:'12px',backgroundColor:'#663399'},'slow');
+	};
+	QfxTool.$$$("div.test",5).onclick = function(){
+		Qfx("div.test(4)").stop(true, true);
+	};
+	QfxTool.$$$("div.test",6).onclick = function(){
+		Qfx("div.test(6)").slideDown('defaults','linear',function(){alert('done!')});
+	};
+	QfxTool.$$$("div.test",7).onclick = function(){
+		Qfx("div.test(7)").slideUp('defaults','linear',function(){alert('done!')});
+	};
+	QfxTool.$$$("div.test",8).onclick = function(){
+		Qfx("div.test(8)").slideToggle('defaults','linear',function(){
+			Qfx("div.test(8)").slideToggle('slow')
+		})
+	};
+	QfxTool.$$$("div.test",9).onclick = function(){
+		Qfx("div.test(9)").fadeIn('defaults','linear',function(){alert('done!')});
+	};
+	QfxTool.$$$("div.test",10).onclick = function(){
+		Qfx("div.test(10)").fadeOut('defaults','linear',function(){alert('done!')});
+	};
+	var bar = QfxTool.$$("Easing","li");
+
+	var fun = function( sv, tv,e){
+		return ( sv + (tv - sv) * e ).toFixed(3);
+	};
+	for(var i=0;i<bar.length;i++){
+		(function(f){
+			bar[f].onclick = function(){
+				for(var o=0;o<bar.length;o++){
+					bar[o].className = "";
+				}
+				this.className = "hover";
+				if(QfxTool.$("gogo").style.left!=="0px"){
+					QfxTool.$("gogo").style.left = "0px";
+					QfxTool.$("gogo").style.backgroundColor = '#9933FF';
+					QfxTool.$("gogo").style.fontSize = '12px';
+				}
+				Qfx("gogo").go({left:'520px',backgroundColor:'#339900',fontSize:"30px"},1000,bar[f].id);
+			}
+		})(i)
+	}
+</script>
+</BODY>
+</HTML>
